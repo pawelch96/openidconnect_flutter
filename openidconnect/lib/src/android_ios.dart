@@ -17,9 +17,12 @@ class OpenIdConnectAndroidiOS {
       barrierDismissible: false,
       builder: (dialogContext) {
         return AlertDialog(
-          insetPadding: usePopup
-              ? EdgeInsets.zero
-              : EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+          contentPadding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
+          insetPadding:
+              // usePopup
+              // ?
+              EdgeInsets.symmetric(horizontal: 1, vertical: 1),
+          // : EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
           // actions: [
           //   IconButton(
           //     onPressed: () => Navigator.pop(dialogContext, null),
@@ -41,7 +44,7 @@ class OpenIdConnectAndroidiOS {
               },
             ),
           ),
-          title: Text(title),
+          // title: Text(title),
         );
       },
     );
