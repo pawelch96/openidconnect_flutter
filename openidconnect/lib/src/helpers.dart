@@ -34,6 +34,10 @@ Future<Map<String, dynamic>?> httpRetry<T extends http.Response>(
       continue;
     }
 
+    if (result.statusCode == 200) {
+      return null;
+    }
+
     final body = result.body.isEmpty
         ? "{}"
         : result.body.startsWith("{")

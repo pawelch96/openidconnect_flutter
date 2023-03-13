@@ -6,6 +6,7 @@ class OpenIdConnectAndroidiOS {
     required String title,
     required String authorizationUrl,
     required String redirectUrl,
+    required bool usePopup,
     required int popupWidth,
     required int popupHeight,
   }) async {
@@ -16,12 +17,15 @@ class OpenIdConnectAndroidiOS {
       barrierDismissible: false,
       builder: (dialogContext) {
         return AlertDialog(
-          actions: [
-            IconButton(
-              onPressed: () => Navigator.pop(dialogContext, null),
-              icon: Icon(Icons.close),
-            ),
-          ],
+          insetPadding: usePopup
+              ? EdgeInsets.zero
+              : EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+          // actions: [
+          //   IconButton(
+          //     onPressed: () => Navigator.pop(dialogContext, null),
+          //     icon: Icon(Icons.close),
+          //   ),
+          // ],
           content: Container(
             width:
                 min(popupWidth.toDouble(), MediaQuery.of(context).size.width),
