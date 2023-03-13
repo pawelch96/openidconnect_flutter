@@ -16,35 +16,25 @@ class OpenIdConnectAndroidiOS {
       context: context,
       barrierDismissible: false,
       builder: (dialogContext) {
-        return AlertDialog(
-          contentPadding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
-          insetPadding:
-              // usePopup
-              // ?
-              EdgeInsets.symmetric(horizontal: 1, vertical: 1),
-          // : EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
-          // actions: [
-          //   IconButton(
-          //     onPressed: () => Navigator.pop(dialogContext, null),
-          //     icon: Icon(Icons.close),
-          //   ),
-          // ],
-          content: Container(
-            width:
-                min(popupWidth.toDouble(), MediaQuery.of(context).size.width),
-            height:
-                min(popupHeight.toDouble(), MediaQuery.of(context).size.height),
-            child: flutterWebView.WebView(
-              javascriptMode: flutterWebView.JavascriptMode.unrestricted,
-              initialUrl: authorizationUrl,
-              onPageFinished: (url) {
-                if (url.startsWith(redirectUrl)) {
-                  Navigator.pop(dialogContext, url);
-                }
-              },
+        return Dialog(
+          insetPadding: EdgeInsets.zero,
+          child: Scaffold(
+            body: Container(
+              width: MediaQuery.of(context).size.width,
+              // min(popupWidth.toDouble(), MediaQuery.of(context).size.width),
+              height: MediaQuery.of(context).size.height,
+              // min(popupHeight.toDouble(), MediaQuery.of(context).size.height),
+              child: flutterWebView.WebView(
+                javascriptMode: flutterWebView.JavascriptMode.unrestricted,
+                initialUrl: authorizationUrl,
+                onPageFinished: (url) {
+                  if (url.startsWith(redirectUrl)) {
+                    Navigator.pop(dialogContext, url);
+                  }
+                },
+              ),
             ),
           ),
-          // title: Text(title),
         );
       },
     );
