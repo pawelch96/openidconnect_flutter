@@ -37,14 +37,15 @@ Future<Map<String, dynamic>?> httpRetry<T extends http.Response>(
     // if (result.statusCode == 200) {
     //   return null;
     // }
-
-    final body = result.body.isEmpty
+    final String resultBody = result.body.trim();
+    final body = resultBody.isEmpty
         ? "{}"
-        : result.body.startsWith("{")
-            ? result.body
-            : result.body.startsWith("<html")
+        : resultBody.startsWith("{")
+            ? resultBody
+            : resultBody.startsWith("<html") ||
+                    resultBody.startsWith('<!DOCTYPE')
                 ? "{}"
-                : "\{\"error\": \"${result.body.replaceAll("\"", "'")}\"\}";
+                : "\{\"error\": \"${resultBody.replaceAll("\"", "'")}\"\}";
 
     final jsonResponse = jsonDecode(body) as Map<String, dynamic>?;
 
@@ -61,6 +62,6 @@ Future<Map<String, dynamic>?> httpRetry<T extends http.Response>(
       }
     }
 
-    return result.body.isEmpty ? null : jsonResponse;
+    return resultBody.isEmpty ? null : jsonResponse;
   }
 }

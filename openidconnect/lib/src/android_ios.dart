@@ -32,6 +32,7 @@ class OpenIdConnectAndroidiOS {
                     Navigator.pop(dialogContext, url);
                   }
                 },
+                backgroundColor: Colors.transparent,
               ),
             ),
           ),
