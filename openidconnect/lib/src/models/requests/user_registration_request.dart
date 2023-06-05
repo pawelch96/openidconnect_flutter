@@ -1,11 +1,11 @@
-import 'package:openidconnect/openidconnect.dart';
+part of openidconnect;
 
-class UserInfoRequest {
+class UserRegistrationRequest {
   final String accessToken;
   final OpenIdConfiguration configuration;
   final String tokenType;
 
-  const UserInfoRequest({
+  const UserRegistrationRequest({
     required this.accessToken,
     required this.configuration,
     this.tokenType = "Bearer",
