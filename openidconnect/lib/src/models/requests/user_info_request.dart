@@ -1,4 +1,4 @@
-import 'package:openidconnect/openidconnect.dart';
+part of openidconnect;
 
 class UserInfoRequest {
   final String accessToken;
