@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:openidconnect/openidconnect.dart';
-import 'credentials.dart';
 
+import 'credentials.dart';
 import 'identity_view.dart';
 
 class InteractivePage extends StatefulWidget {
@@ -92,6 +92,7 @@ class _InteractivePageState extends State<InteractivePage> {
                       final response = await OpenIdConnect.authorizeInteractive(
                         context: context,
                         title: "Login",
+                        isLoggedIn: false,
                         request: await InteractiveAuthorizationRequest.create(
                           clientId: defaultClientId,
                           clientSecret: defaultClientSecret,

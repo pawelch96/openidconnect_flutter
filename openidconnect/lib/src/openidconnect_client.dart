@@ -195,6 +195,7 @@ class OpenIdConnectClient {
   Future<OpenIdIdentity> loginInteractive({
     required BuildContext context,
     required String title,
+    required bool isLoggedIn,
     String? userNameHint,
     Map<String, String>? additionalParameters,
     Iterable<String>? prompts,
@@ -216,6 +217,7 @@ class OpenIdConnectClient {
       final response = await OpenIdConnect.authorizeInteractive(
         context: context,
         title: title,
+        isLoggedIn: isLoggedIn,
         request: await InteractiveAuthorizationRequest.create(
           configuration: configuration!,
           clientId: clientId,
@@ -394,7 +396,8 @@ class OpenIdConnectClient {
       await _completeLogin(response);
 
       if (autoRefresh) {
-        var refreshTime = _identity!.expiresAt.difference(DateTime.now().toUtc());
+        var refreshTime =
+            _identity!.expiresAt.difference(DateTime.now().toUtc());
         refreshTime -= Duration(minutes: 1);
 
         _autoRenewTimer = Future.delayed(refreshTime, refresh);

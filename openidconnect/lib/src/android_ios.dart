@@ -7,6 +7,7 @@ class OpenIdConnectAndroidiOS {
     required String authorizationUrl,
     required String redirectUrl,
     required bool usePopup,
+    required bool isLoggedIn,
     required int popupWidth,
     required int popupHeight,
   }) async {
@@ -33,8 +34,10 @@ class OpenIdConnectAndroidiOS {
                   }
                 },
                 onWebViewCreated: (controller) {
-                  controller.clearCache();
-                  flutterWebView.CookieManager().clearCookies();
+                  if (!isLoggedIn) {
+                    controller.clearCache();
+                    flutterWebView.CookieManager().clearCookies();
+                  }
                 },
                 backgroundColor: Colors.transparent,
               ),

@@ -71,6 +71,7 @@ class OpenIdConnect {
   static Future<AuthorizationResponse?> authorizeInteractive({
     required BuildContext context,
     required String title,
+    required bool isLoggedIn,
     required InteractiveAuthorizationRequest request,
   }) async {
     late String? responseUrl;
@@ -88,6 +89,7 @@ class OpenIdConnect {
       responseUrl = await OpenIdConnectAndroidiOS.authorizeInteractive(
         context: context,
         title: title,
+        isLoggedIn: isLoggedIn,
         authorizationUrl: uri.toString(),
         redirectUrl: request.redirectUrl,
         usePopup: request.useWebPopup,
