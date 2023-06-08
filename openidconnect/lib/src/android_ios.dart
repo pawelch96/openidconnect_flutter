@@ -32,6 +32,10 @@ class OpenIdConnectAndroidiOS {
                     Navigator.pop(dialogContext, url);
                   }
                 },
+                onWebViewCreated: (controller) {
+                  controller.clearCache();
+                  flutterWebView.CookieManager().clearCookies();
+                },
                 backgroundColor: Colors.transparent,
               ),
             ),
