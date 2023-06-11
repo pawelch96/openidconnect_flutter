@@ -25,22 +25,33 @@ class OpenIdConnectAndroidiOS {
               // min(popupWidth.toDouble(), MediaQuery.of(context).size.width),
               height: MediaQuery.of(context).size.height,
               // min(popupHeight.toDouble(), MediaQuery.of(context).size.height),
-              child: flutterWebView.WebView(
-                javascriptMode: flutterWebView.JavascriptMode.unrestricted,
-                initialUrl: authorizationUrl,
-                onPageFinished: (url) {
-                  if (url.startsWith(redirectUrl)) {
-                    Navigator.pop(dialogContext, url);
-                  }
-                },
-                onWebViewCreated: (controller) {
-                  if (!isLoggedIn) {
-                    controller.clearCache();
-                    flutterWebView.CookieManager().clearCookies();
-                  }
-                },
-                backgroundColor: Colors.transparent,
-              ),
+              child: isLoggedIn
+                  ? flutterWebView.WebView(
+                      javascriptMode:
+                          flutterWebView.JavascriptMode.unrestricted,
+                      initialUrl: authorizationUrl,
+                      onPageFinished: (url) {
+                        if (url.startsWith(redirectUrl)) {
+                          Navigator.pop(dialogContext, url);
+                        }
+                      },
+                      backgroundColor: Colors.transparent,
+                    )
+                  : flutterWebView.WebView(
+                      javascriptMode:
+                          flutterWebView.JavascriptMode.unrestricted,
+                      initialUrl: authorizationUrl,
+                      onPageFinished: (url) {
+                        if (url.startsWith(redirectUrl)) {
+                          Navigator.pop(dialogContext, url);
+                        }
+                      },
+                      onWebViewCreated: (controller) {
+                        controller.clearCache();
+                        flutterWebView.CookieManager().clearCookies();
+                      },
+                      backgroundColor: Colors.transparent,
+                    ),
             ),
           ),
         );
